@@ -75,9 +75,21 @@ func main() {
 		// Flatten nested JSON to dot-notation keys so sigma field references work
 		// directly (e.g. "event.exec.target.executable.path").
 		// The full JSON line is also stored as Message to support keyword detections.
+		fields := flattenJSON(raw)
+
+		// eslogger reports event_type as an ES framework integer (e.g. 9 for exec).
+		// Derive a human-readable event_type_name from the key present inside the
+		// "event" object so rules can match on: event_type_name: exec
+		if eventObj, ok := raw["event"].(map[string]any); ok {
+			for k := range eventObj {
+				fields["event_type_name"] = k
+				break
+			}
+		}
+
 		entry := &sigma.LogEntry{
 			Message: string(line),
-			Fields:  flattenJSON(raw),
+			Fields:  fields,
 		}
 
 		for _, rule := range rules {

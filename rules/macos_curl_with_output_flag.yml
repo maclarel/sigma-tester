@@ -11,11 +11,11 @@ logsource:
   category: process_creation
 detection:
   selection_process:
-    event_type: exec
+    event_type_name: exec
     event.exec.target.executable.path|endswith: '/curl'
   selection_args:
-    # event.exec.target.args holds space-joined argv for |contains matching
-    event.exec.target.args|contains:
+    # event.exec.args holds space-joined argv for |contains matching
+    event.exec.args|contains:
       - ' -o '
       - ' --output '
       - ' -O '

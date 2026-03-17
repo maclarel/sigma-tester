@@ -12,7 +12,7 @@ logsource:
   category: process_creation
 detection:
   selection_event:
-    event_type: exec
+    event_type_name: exec
   selection_path:
     event.exec.target.executable.path|startswith:
       - '/tmp/'

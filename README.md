@@ -45,8 +45,18 @@ level: high
 Nested JSON objects are flattened to dot-notation keys (`a.b.c`). Arrays are stored at both indexed keys (`args.0`, `args.1`, …) and as a space-joined string at the parent key, so `|contains` works across all elements without per-index references:
 
 ```yaml
-event.exec.target.args|contains: ' --output '
+event.exec.args|contains: ' --output '
 ```
+
+### Derived Fields
+
+`eslogger` reports `event_type` as a numeric ES framework constant (e.g. `9` for exec). A synthetic `event_type_name` field is added to each event by inspecting the key present inside the `event` object, giving a human-readable string for use in rules:
+
+```yaml
+event_type_name: exec   # instead of event_type: 9
+```
+
+Common values: `exec`, `fork`, `exit`, `open`, `close`, `create`, `rename`, `unlink`, `write`.
 
 ### Keyword Detections
 
