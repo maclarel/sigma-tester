@@ -1,0 +1,29 @@
+title: curl Writing Output to Disk
+id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+status: test
+description: |
+  Detects curl invocations that write downloaded content to disk (-o / --output).
+  Common in download-and-execute patterns and C2 stager chains.
+author: sigma-tester
+date: 2026-03-17
+logsource:
+  product: macos
+  category: process_creation
+detection:
+  selection_process:
+    event_type: exec
+    event.exec.target.executable.path|endswith: '/curl'
+  selection_args:
+    # event.exec.target.args holds space-joined argv for |contains matching
+    event.exec.target.args|contains:
+      - ' -o '
+      - ' --output '
+      - ' -O '
+  condition: selection_process and selection_args
+falsepositives:
+  - Legitimate package managers (Homebrew, MacPorts) invoking curl
+  - System update processes
+level: medium
+tags:
+  - attack.command_and_control
+  - attack.t1105

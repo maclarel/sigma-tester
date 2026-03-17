@@ -1,0 +1,29 @@
+title: Process Execution from Temporary Directory
+id: 7e3f1a2b-4c5d-6e7f-8a9b-0c1d2e3f4a5b
+status: test
+description: |
+  Detects a process spawned directly from a world-writable temporary directory.
+  Attackers frequently drop and execute payloads in /tmp or /var/tmp to avoid
+  writing to monitored locations.
+author: sigma-tester
+date: 2026-03-17
+logsource:
+  product: macos
+  category: process_creation
+detection:
+  selection_event:
+    event_type: exec
+  selection_path:
+    event.exec.target.executable.path|startswith:
+      - '/tmp/'
+      - '/var/tmp/'
+      - '/private/tmp/'
+      - '/private/var/tmp/'
+  condition: selection_event and selection_path
+falsepositives:
+  - Legitimate build systems or installers staging binaries in /tmp
+level: high
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - attack.t1036.005

@@ -1,0 +1,5 @@
+github.com/runreveal/sigmalite v0.0.0-20250918190104-f180cb50a6a1 h1:F3lDEkQCKG8MtTVInUOAS4Y6240aiVSdirHmNrqoTWw=
+github.com/runreveal/sigmalite v0.0.0-20250918190104-f180cb50a6a1/go.mod h1:ksCQi8C5IznGK6pNuBFHau7Dv5Y2UoC7LOwxdyb6hAc=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
+gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
